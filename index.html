@@ -22,10 +22,13 @@
 			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 			max-width: 300px;
             width: 25%;
+			height: 320px;
 			margin: 10px;
 			text-align: center;
 			font-family: arial;
 			overflow: hidden;
+			border: 1px solid;
+			border-radius: 10px;
 		}
 
 		.card img {
@@ -63,35 +66,46 @@
                 card.style.backgroundColor = "green";
                 switch (pokemonData.types[0].type.name) {
                     case 'grass':
-                        card.style.backgroundColor = '#4ac734';
+                        card.style.backgroundColor = '#8DD694';
+						card.style.borderColor = '#5DAD65';
                         break;
                     case 'fire':
-                        card.style.backgroundColor = '#Ea120e';
+                        card.style.backgroundColor = '#E69D8D';
+						card.style.borderColor = '#C67D6D';
                         break;
                     case 'water':
-                        card.style.backgroundColor = '#279de8';
+                        card.style.backgroundColor = '#8DC6E6';
+						card.style.borderColor = '#6F9ECA';
                         break;
                     case 'bug':
-                        card.style.backgroundColor = '#E25916';
+                        card.style.backgroundColor = '#BDDD7A';
+						card.style.borderColor = '#A2C170';
                         break;
                     case 'normal':
-                        card.style.backgroundColor = '#53555a';
+                        card.style.backgroundColor = '#B1B1B1';
+						card.style.borderColor = '#959595';
                         break;
                     case 'poison':
-                        card.style.backgroundColor = '#D410b8';
+                        card.style.backgroundColor = '#A55DB1';
+						card.style.borderColor = '#8A4A95';
                         break;
                     case 'electric':
-                        card.style.backgroundColor = '#25B6BE';
+                        card.style.backgroundColor = '#E7C859';
+						card.style.borderColor = '#D0B34A';
                         break;
                     case 'ground':
-                        card.style.backgroundColor = '#BE6B25';
+                        card.style.backgroundColor = '#EFBE85';
+						card.style.borderColor = '#D0A068';
                         break;
                     case 'fairy':
-                        card.style.backgroundColor = '#EEE3D9';
+                        card.style.backgroundColor = '#EEA1E2';
+						card.style.borderColor = '#C77FBC';
                         break;
                     default:
                         card.style.backgroundColor = 'black';
                 }
+
+
 				card.innerHTML = `
                     <h3>${pokemonData.id} : ${pokemon.name}</h3>
 					<img src="${pokemonData.sprites.front_default}" alt="${pokemon.name}" width="200" height="200">
