@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pokemon API</title>
+	<style>
+
+        body {
+            text-align: center;
+            justify-content: center;
+        }
+
+		.container {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			margin: 20px;
+		}
+
+		.card {
+			background-color: #fff;
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+			max-width: 300px;
+            width: 25%;
+			margin: 10px;
+			text-align: center;
+			font-family: arial;
+			overflow: hidden;
+		}
+
+		.card img {
+			max-width: 100%;
+		}
+
+		.card h3 {
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+    <h1>Get Pokemon</h1>
+	<button id="load-btn">Load Pokemon</button>
+	<div class="container"></div>
+	<script>
+		const container = document.querySelector('.container');
+		const loadBtn = document.querySelector('#load-btn');
+
+		async function getPokemonData(url) {
+			const response = await fetch(url);
+			const data = await response.json();
+			return data;
+		}
+
+		async function loadPokemon() {
+			const url = 'https://pokeapi.co/api/v2/pokemon?limit=36';
+			const data = await getPokemonData(url);
+			const pokemonList = data.results;
+			container.innerHTML = '';
+			pokemonList.forEach(async (pokemon) => {
+				const pokemonData = await getPokemonData(pokemon.url);
+				const card = document.createElement('div');
+				card.classList.add('card');
+                card.style.backgroundColor = "green";
+                switch (pokemonData.types[0].type.name) {
+                    case 'grass':
+                        card.style.backgroundColor = '#4ac734';
+                        break;
+                    case 'fire':
+                        card.style.backgroundColor = '#Ea120e';
+                        break;
+                    case 'water':
+                        card.style.backgroundColor = '#279de8';
+                        break;
+                    case 'bug':
+                        card.style.backgroundColor = '#E25916';
+                        break;
+                    case 'normal':
+                        card.style.backgroundColor = '#53555a';
+                        break;
+                    case 'poison':
+                        card.style.backgroundColor = '#D410b8';
+                        break;
+                    case 'electric':
+                        card.style.backgroundColor = '#25B6BE';
+                        break;
+                    case 'ground':
+                        card.style.backgroundColor = '#BE6B25';
+                        break;
+                    case 'fairy':
+                        card.style.backgroundColor = '#EEE3D9';
+                        break;
+                    default:
+                        card.style.backgroundColor = 'black';
+                }
+				card.innerHTML = `
+                    <h3>${pokemonData.id} : ${pokemon.name}</h3>
+					<img src="${pokemonData.sprites.front_default}" alt="${pokemon.name}" width="200" height="200">
+					<h3>Type: ${pokemonData.types[0].type.name}</h3>
+				`;
+				container.appendChild(card);
+			});
+		}
+
+		loadBtn.addEventListener('click', loadPokemon);
+	</script>
+</body>
+</html>
